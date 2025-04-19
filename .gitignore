@@ -1,0 +1,55 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+.venv/
+env/
+venv/
+
+# macOS files
+.DS_Store
+
+# VSCode settings
+.vscode/
+
+# Lambda deployment packages
+*.zip
+
+# Terraform files
+*.tfstate
+*.tfstate.*
+.terraform/
+crash.log
+terraform.tfvars
+terraform.tfvars.json
+override.tf
+override.tf.json
+.terraform.lock.hcl
+
+# AWS credential files
+.aws/
+
+# Logs
+*.log
+
+# Python build artifacts
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Other potential editor swap files
+*.swp
+*.swo
+
+# Docker
+docker-compose.override.yml
+.docker/
+.dockerignore
+Dockerfile.*
+*.tar
+*.img
+*.container
+*.pid
