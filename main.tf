@@ -18,10 +18,10 @@ resource "aws_s3_bucket" "image_bucket" {
 resource "aws_s3_bucket_public_access_block" "allow_public_policy" {
   bucket = aws_s3_bucket.image_bucket.id
 
-  block_public_acls       = false
-  block_public_policy     = false
-  ignore_public_acls      = false
-  restrict_public_buckets = false
+  block_public_acls       = true
+  block_public_policy     = true
+  ignore_public_acls      = true
+  restrict_public_buckets = true
 }
 
 # SQS Queue for image processing
@@ -82,9 +82,16 @@ resource "aws_s3_bucket_policy" "optimized_folder_policy" {
     Statement = [
       {
         Effect = "Allow",
-        Principal = "*",
+        Principal = {
+          Service = "cloudfront.amazonaws.com"
+        },
         Action = "s3:GetObject",
-        Resource = "${aws_s3_bucket.image_bucket.arn}/optimized/*"
+        Resource = "${aws_s3_bucket.image_bucket.arn}/optimized/*",
+        Condition = {
+          StringEquals = {
+            "AWS:SourceArn" = aws_cloudfront_distribution.image_distribution.arn
+          }
+        }
       }
     ]
   })
